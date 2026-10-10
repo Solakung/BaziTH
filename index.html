@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BaziTH ผังปาจื้อ</title>
+  <meta name="description" content="คำนวณผังปาจื้อ (八字 สี่เสา) จากวันเวลาเกิด ด้วยตำแหน่งดวงอาทิตย์จริง รองรับปี พ.ศ. และเวลาสุริยะจริงของทุกจังหวัด">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600&family=Noto+Serif+SC:wght@500;700;900&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="./"><span class="zh" lang="zh-Hans">八字</span>BaziTH</a>
+      <nav aria-label="เมนูหลัก">
+        <ul class="nav">
+          <li><a href="./" aria-current="page">ผังดวง</a></li>
+          <li><a href="textbook.html">ตำรา</a></li>
+          <li><a href="https://github.com/Solakung/BaziTH">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="intro">
+      <h1>ผังปาจื้อจากวันเวลาเกิด</h1>
+      <p>ปาจื้อ (<span class="zh" lang="zh-Hans">八字</span>) แปลงวันเวลาเกิดเป็นอักษรจีน 8 ตัว เรียงเป็น 4 เสา คือ ยาม วัน เดือน และปี แล้วอ่านดวงจากสมดุลของธาตุทั้งห้า หน้านี้คำนวณจากตำแหน่งดวงอาทิตย์จริง และคิดเวลาสุริยะจริงของจังหวัดที่เกิดได้</p>
+    </section>
+
+    <div class="hero">
+      <section id="chart-panel" class="chart-panel" aria-labelledby="chart-title">
+        <div class="chart-head">
+          <h2 id="chart-title">เวลาขณะนี้</h2>
+          <button type="button" id="back-now" class="link-btn" hidden>ดูผังของเวลาขณะนี้</button>
+          <p id="chart-meta" class="chart-meta"></p>
+        </div>
+        <div id="warnings"></div>
+        <noscript><div class="warn"><strong>ต้องเปิด JavaScript</strong><p>หน้านี้คำนวณผังด้วย JavaScript ในเบราว์เซอร์ กรุณาเปิดใช้งานแล้วโหลดหน้าใหม่</p></div></noscript>
+        <div id="chart"></div>
+        <p id="chart-foot" class="chart-foot"></p>
+        <p id="gloss" class="gloss" aria-live="polite">แตะอักษรหรือชื่อเสาเพื่อดูความหมาย</p>
+      </section>
+
+      <form id="birth" class="birth-form" novalidate>
+       <details id="form-box" open>
+        <summary class="form-summary"><h2 id="form-title">ใส่วันเวลาเกิด</h2></summary>
+
+        <fieldset class="field">
+          <legend>วันเกิด</legend>
+          <div class="row-date">
+            <select id="f-day" name="day" aria-label="วันที่"></select>
+            <select id="f-month" name="month" aria-label="เดือน"></select>
+            <input id="f-year" name="year" type="text" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="ปี" aria-label="ปี">
+            <select id="f-era" name="era" aria-label="ศักราช">
+              <option value="BE">พ.ศ.</option>
+              <option value="CE">ค.ศ.</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>เวลาเกิด</legend>
+          <div class="row-time">
+            <select id="f-hour" name="hour" aria-label="ชั่วโมง"></select>
+            <span aria-hidden="true">:</span>
+            <select id="f-minute" name="minute" aria-label="นาที"></select>
+            <span>น.</span>
+          </div>
+          <label class="check"><input type="checkbox" id="f-unknown" name="unknown"> ไม่ทราบเวลาเกิด</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="f-place">สถานที่เกิด</label>
+          <select id="f-place" name="place"></select>
+          <p id="place-hint" class="hint">เลือกจังหวัดเพื่อคิดเวลาสุริยะจริง ยามจะตรงกับตำแหน่งดวงอาทิตย์ ณ ที่เกิด</p>
+          <div id="abroad" class="abroad" hidden>
+            <div>
+              <label for="f-tz">เขตเวลาของที่เกิด</label>
+              <select id="f-tz" name="tz"></select>
+            </div>
+            <div>
+              <label for="f-lon">ลองจิจูด (องศาตะวันออก ตะวันตกใส่ค่าติดลบ)</label>
+              <input id="f-lon" name="lon" type="text" inputmode="decimal" autocomplete="off" placeholder="เช่น 139.69 สำหรับโตเกียว">
+            </div>
+          </div>
+        </div>
+
+        <fieldset class="field">
+          <legend>เพศ</legend>
+          <div class="radios">
+            <label class="radio"><input type="radio" name="gender" value="M"> ชาย</label>
+            <label class="radio"><input type="radio" name="gender" value="F"> หญิง</label>
+            <label class="radio"><input type="radio" name="gender" value="" checked> ไม่ระบุ</label>
+          </div>
+          <p class="hint">ใช้หาทิศทางของวัยจร 10 ปีเท่านั้น</p>
+        </fieldset>
+
+        <details class="field adv">
+          <summary>ตั้งค่าตามสำนัก</summary>
+          <fieldset>
+            <legend class="field-label">เกิดเวลา 23:00–23:59 น.</legend>
+            <div class="radios">
+              <label class="radio"><input type="radio" name="lateZi" value="nextDay" checked> นับเป็นวันถัดไป (จื่อผิงดั้งเดิม)</label>
+              <label class="radio"><input type="radio" name="lateZi" value="sameDay"> นับเป็นวันเดิม (ยามชวดดึก)</label>
+            </div>
+          </fieldset>
+          <label class="check"><input type="checkbox" id="f-solar" name="solar" checked> ใช้เวลาสุริยะจริงเมื่อระบุสถานที่เกิด</label>
+        </details>
+
+        <p id="form-error" class="form-error" role="alert"></p>
+        <button type="submit" class="btn">ดูผังดวง</button>
+        <p class="hint privacy">คำนวณในเบราว์เซอร์นี้ ไม่มีการส่งวันเกิดไปที่ใด</p>
+       </details>
+      </form>
+    </div>
+
+    <div id="results" class="results" hidden></div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p>ปาจื้อเป็นศาสตร์ความเชื่อ ไม่มีหลักฐานทางวิทยาศาสตร์ว่าทำนายชีวิตได้ ใช้ผลนี้เพื่อความบันเทิงและการทบทวนตัวเอง ไม่ใช่คำแนะนำด้านสุขภาพ การเงิน หรือกฎหมาย</p>
+      <p>หลักการทั้งหมดอยู่ใน<a href="textbook.html">ตำราปาจื้อฉบับนักพัฒนา</a> ส่วนโค้ดคำนวณเปิดดูได้บน <a href="https://github.com/Solakung/BaziTH">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>
