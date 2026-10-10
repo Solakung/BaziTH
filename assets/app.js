@@ -1,10 +1,12 @@
-// หน้าผังดวง: รับวันเวลาเกิด คำนวณด้วย src/bazi-core.js แล้วแสดงผัง ผลวิเคราะห์ วัยจร และปีจร
+// หน้าผังดวง: รับวันเวลาเกิด คำนวณด้วย src/bazi-core.js แล้วแสดงผังกับผลสามมุม คืออ่านง่าย ถามดวง และละเอียด
 // ทุกอย่างคำนวณในเบราว์เซอร์ ไม่มีการส่งข้อมูลออก
 import * as B from '../src/bazi-core.js';
 import * as T from './terms.js';
+import * as R from './reading.js';
+import { TZ_TH, $, pad, zh, ch, pair, elWord, thDate, thMonthYear, hhmm, weekday, stamp, wall, jdWall, nowWall, legend } from './fmt.js';
+import { easyPanel, askPanel, bindAsk, bindEasy } from './views.js';
 
-const TZ_TH = 'Asia/Bangkok';
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 const ORDER = ['hour', 'day', 'month', 'year']; // เรียงแบบตำราจีน ยามซ้าย ปีขวา
 const PILLAR = { year: 'ปี', month: 'เดือน', day: 'วัน', hour: 'ยาม' };
 const POS = { year: 0, month: 1, day: 2, hour: 3 };
@@ -15,39 +17,11 @@ const ORDER_NOTE = 'เรียงแบบตำราจีน ยามอ�
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const wide = matchMedia('(min-width: 960px)');
 
-// ───────── ตัวช่วยแสดงผล ─────────
-const $ = (id) => document.getElementById(id);
-const pad = (n) => String(n).padStart(2, '0');
-const zh = (s) => `<span class="zh" lang="zh-Hans">${s}</span>`;
 const elOfChar = (c) => { const s = B.STEMS.indexOf(c); return s >= 0 ? s >> 1 : B.BRANCH_ELEMENT[B.BRANCHES.indexOf(c)]; };
-const ch = (c) => `<span class="zh el-${elOfChar(c)}" lang="zh-Hans">${c}</span>`;
-const pair = (name) => `<span class="pair">${[...name].map(ch).join('')}</span>`;
-const elWord = (e) => `<span class="el-${e}">${T.ELEMENT[e].th}</span>`;
 const godOf = (dm, s) => B.TEN_GODS[B.tenGod(dm, s)];
 const signed = (x) => (x >= 0 ? `+${x.toFixed(1)}` : `−${Math.abs(x).toFixed(1)}`);
+const footHtml = () => `<span>${ORDER_NOTE}</span><span>สีบอกธาตุ ${legend()}</span>`;
 
-// ───────── วันเวลา ─────────
-/** ปี พ.ศ. ของวันที่ ค.ศ. — ก่อน ค.ศ. 1941 ไทยขึ้นปีใหม่ 1 เมษายน (ตำราบทที่ 7.6) */
-const beYear = (y, m) => (y < 1941 && m <= 3 ? y + 542 : y + 543);
-const thDate = (t, short = false) => `${t.d} ${(short ? T.MONTHS_SHORT : T.MONTHS)[t.m - 1]} ${beYear(t.y, t.m)}`;
-const thMonthYear = (t) => `${T.MONTHS_SHORT[t.m - 1]} ${beYear(t.y, t.m)}`;
-const hhmm = (t) => `${pad(t.h)}:${pad(t.mi)}`;
-const weekday = (t) => T.WEEKDAYS[new Date(Date.UTC(t.y, t.m - 1, t.d)).getUTCDay()];
-const stamp = (t) => Date.UTC(t.y, t.m - 1, t.d, t.h ?? 0, t.mi ?? 0);
-
-const formatters = new Map();
-/** เวลานาฬิกาของเขตเวลา timeZone ณ เวลา ms */
-function wall(ms, timeZone) {
-  let f = formatters.get(timeZone);
-  if (!f) {
-    f = new Intl.DateTimeFormat('en-US', { timeZone, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
-    formatters.set(timeZone, f);
-  }
-  const p = Object.fromEntries(f.formatToParts(new Date(ms)).map((x) => [x.type, x.value]));
-  return { y: +p.year, m: +p.month, d: +p.day, h: +p.hour % 24, mi: +p.minute };
-}
-const jdWall = (jd, timeZone) => wall(B.jdToMs(jd), timeZone);
-const nowWall = () => wall(Date.now(), TZ_TH);
 function nowInput() {
   const t = nowWall();
   return { year: t.y, month: t.m, day: t.d, hour: t.h, minute: t.mi, timeZone: TZ_TH };
@@ -290,7 +264,7 @@ function renderNow() {
   const p = jdWall(prevJD, TZ_TH), n = jdWall(nextJD, TZ_TH);
   const nextMonth = B.gzName((chart.pillars.month + 1) % 60);
   const jie = (lon) => `${zh(B.JIE_NAMES[lon])} (${T.JIE[B.JIE_NAMES[lon]]})`;
-  $('chart-foot').innerHTML = `<span>${ORDER_NOTE}</span>
+  $('chart-foot').innerHTML = `${footHtml()}
     <span>เดือน ${pair(chart.names.month)} เริ่มเมื่อสารท ${jie(prevLon)} ${thDate(p, true)} ${hhmm(p)} น. และจะเปลี่ยนเป็นเดือน ${pair(nextMonth)} เมื่อถึงสารท ${jie(nextLon)} ${thDate(n, true)} ${hhmm(n)} น.</span>`;
   const box = $('chart');
   box.classList.remove('flip');
@@ -302,7 +276,7 @@ function backToNow() {
   nowKey = '';
   $('back-now').hidden = true;
   $('results').hidden = true;
-  $('results').innerHTML = '';
+  for (const id of ['panel-easy', 'panel-ask', 'panel-detail']) $(id).innerHTML = '';
   $('gloss').textContent = GLOSS_HINT;
   $('form-box').open = true;
   renderNow();
@@ -324,6 +298,7 @@ function renderBirth(input, meta) {
   let cur = -1;
   if (luck) luck.pillars.forEach((p, i) => { if (stamp(p.startDate) <= today) cur = i; });
   const ctx = { chart, A, input, meta, luck, cur };
+  ctx.rc = R.makeContext({ chart, A, now: nowWall() });
 
   mode = 'birth';
   current = ctx;
@@ -337,17 +312,47 @@ function renderBirth(input, meta) {
   void box.offsetWidth; // เริ่มแอนิเมชันใหม่ทุกครั้งที่คำนวณ
   box.classList.add('flip');
   $('gloss').textContent = GLOSS_HINT;
-  $('chart-foot').innerHTML = `<span>${ORDER_NOTE}</span>`;
+  $('chart-foot').innerHTML = footHtml();
   if (!wide.matches) $('form-box').open = false;
   syncFormBox();
 
-  const results = $('results');
-  results.innerHTML = [
+  $('panel-easy').innerHTML = easyPanel(ctx);
+  $('panel-ask').innerHTML = askPanel(ctx);
+  $('panel-detail').innerHTML = [
     dayMasterSection(ctx), elementsSection(ctx), favorableSection(ctx), relationsSection(ctx),
     luckSection(ctx), yearsSection(ctx), starsSection(ctx), calcSection(ctx),
   ].join('');
-  results.hidden = false;
+  const askAbout = bindAsk(ctx);
+  bindEasy(ctx, (q) => { selectTab('ask'); askAbout(q); });
+  $('results').hidden = false;
+  selectTab(savedTab(), false);
   $('chart-panel').scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+}
+
+// ───────── แท็บผลลัพธ์: อ่านง่าย / ถามดวง / ละเอียด ─────────
+const TABS = ['easy', 'ask', 'detail'];
+const TAB_KEY = 'bazith.tab';
+function savedTab() {
+  try { const t = localStorage.getItem(TAB_KEY); return TABS.includes(t) ? t : 'easy'; } catch { return 'easy'; }
+}
+function selectTab(name, focus = false) {
+  for (const t of TABS) {
+    const on = t === name;
+    const tab = $(`tab-${t}`);
+    tab.setAttribute('aria-selected', String(on));
+    tab.tabIndex = on ? 0 : -1;
+    $(`panel-${t}`).hidden = !on;
+    if (on && focus) tab.focus();
+  }
+  try { localStorage.setItem(TAB_KEY, name); } catch { /* ไม่มีที่เก็บก็ใช้ค่าเริ่มต้น */ }
+}
+function onTabKey(event) {
+  const i = TABS.indexOf(event.target.id.replace('tab-', ''));
+  if (i < 0) return;
+  const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: TABS.length - 1 }[event.key];
+  if (next == null) return;
+  event.preventDefault();
+  selectTab(TABS[(next + TABS.length) % TABS.length], true);
 }
 
 function birthMeta({ chart, input, meta }) {
@@ -487,7 +492,7 @@ function elementsSection({ chart, A }) {
   </section>`;
 }
 
-function favorableSection({ chart, A }) {
+function favorableSection({ chart, A, rc }) {
   const F = A.favorable;
   const mb = chart.pillars.month % 12;
   const items = F.favorable.map((e) => {
@@ -503,6 +508,11 @@ function favorableSection({ chart, A }) {
     notes.push(A.favorable.strength.level === 'veryStrong'
       ? `ผังแข็งมาก ผลนี้ใช้แนวตามแข็ง ${zh('专旺')} ซึ่งสำนักต่าง ๆ ยังเห็นไม่ตรงกัน ควรให้ผู้รู้ยืนยัน`
       : `ผังอ่อนมาก ผลนี้ใช้แนวตามอ่อน ${zh('从弱')} ซึ่งสำนักต่าง ๆ ยังเห็นไม่ตรงกัน ควรให้ผู้รู้ยืนยัน`);
+    const S = rc?.schools;
+    if (S) {
+      const list = (a) => (a.length ? a.map(elWord).join(' ') : 'ไม่มี');
+      notes.push(`ถ้าใช้${S.normal.name}จะได้ ${list(S.normal.fav)} ทั้งสองแนวเห็นตรงกันที่ ${list(S.both)} แท็บอ่านง่ายและถามดวงจึงนับเฉพาะธาตุที่ตรงกัน ส่วนธาตุที่เห็นต่างนับเป็นกลาง (ตำราบทที่ 12 และ 16)`);
+    }
   }
   return `<section>
     <h2>ธาตุให้คุณ${zh('用神')}</h2>
@@ -732,6 +742,8 @@ function calcSection({ chart, input, meta }) {
 // ───────── เริ่มทำงาน ─────────
 setupForm();
 $('chart').addEventListener('click', onChartClick);
+for (const t of TABS) $(`tab-${t}`).addEventListener('click', () => selectTab(t));
+$('tabs').addEventListener('keydown', onTabKey);
 $('back-now').addEventListener('click', backToNow);
 $('form-box').addEventListener('toggle', syncFormBox);
 wide.addEventListener('change', syncFormBox);

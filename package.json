@@ -1,12 +1,12 @@
 {
   "name": "bazith",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ตำราและไลบรารีคำนวณปาจื้อ (八字 สี่เสา) สำหรับสร้างแอปดูดวงภาษาไทย",
   "type": "module",
   "main": "src/bazi-core.js",
   "exports": "./src/bazi-core.js",
   "scripts": {
-    "test": "node test/bazi-core.test.js"
+    "test": "node test/bazi-core.test.js && node test/reading.test.js"
   },
   "engines": {
     "node": ">=18"

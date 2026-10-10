@@ -21,6 +21,7 @@
       <nav aria-label="เมนูหลัก">
         <ul class="nav">
           <li><a href="./" aria-current="page">ผังดวง</a></li>
+          <li><a href="guide.html">มือใหม่</a></li>
           <li><a href="textbook.html">ตำรา</a></li>
           <li><a href="https://github.com/Solakung/BaziTH">GitHub</a></li>
         </ul>
@@ -32,6 +33,7 @@
     <section class="intro">
       <h1>ผังปาจื้อจากวันเวลาเกิด</h1>
       <p>ปาจื้อ (<span class="zh" lang="zh-Hans">八字</span>) แปลงวันเวลาเกิดเป็นอักษรจีน 8 ตัว เรียงเป็น 4 เสา คือ ยาม วัน เดือน และปี แล้วอ่านดวงจากสมดุลของธาตุทั้งห้า หน้านี้คำนวณจากตำแหน่งดวงอาทิตย์จริง และคิดเวลาสุริยะจริงของจังหวัดที่เกิดได้</p>
+      <p class="intro-cta">ไม่เคยรู้จักปาจื้อมาก่อน เริ่มที่ <a href="guide.html">ปาจื้อสำหรับมือใหม่</a> อ่านจบในไม่กี่นาที หรือกรอกวันเกิดแล้วดูแท็บ "อ่านง่าย" ได้เลย</p>
     </section>
 
     <div class="hero">
@@ -121,7 +123,16 @@
       </form>
     </div>
 
-    <div id="results" class="results" hidden></div>
+    <div id="results" class="results" hidden>
+      <div id="tabs" class="tabs" role="tablist" aria-label="มุมมองผลดวง">
+        <button type="button" role="tab" id="tab-easy" aria-controls="panel-easy" aria-selected="true">อ่านง่าย<small>สำหรับมือใหม่</small></button>
+        <button type="button" role="tab" id="tab-ask" aria-controls="panel-ask" aria-selected="false" tabindex="-1">ถามดวง<small>เลือกเรื่องที่อยากรู้</small></button>
+        <button type="button" role="tab" id="tab-detail" aria-controls="panel-detail" aria-selected="false" tabindex="-1">ละเอียด<small>สำหรับผู้ศึกษา</small></button>
+      </div>
+      <div id="panel-easy" class="panel panel-easy" role="tabpanel" aria-labelledby="tab-easy" tabindex="0"></div>
+      <div id="panel-ask" class="panel panel-ask" role="tabpanel" aria-labelledby="tab-ask" tabindex="0" hidden></div>
+      <div id="panel-detail" class="panel panel-detail" role="tabpanel" aria-labelledby="tab-detail" tabindex="0" hidden></div>
+    </div>
   </main>
 
   <footer class="site-foot">

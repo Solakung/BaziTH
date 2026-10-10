@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ปาจื้อสำหรับมือใหม่ BaziTH</title>
+  <meta name="description" content="ปาจื้อ (八字) แบบเข้าใจง่ายสำหรับคนที่ไม่เคยเรียน: แปดอักษรคืออะไร ตัวไหนคือตัวคุณ ธาตุทั้งห้า บทบาทของธาตุ ธาตุที่ช่วยคุณ ดวงที่เปลี่ยนตามช่วงเวลา และถามดวงต่างจากไพ่ยิปซีอย่างไร">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600&family=Noto+Serif+SC:wght@500;700;900&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="./"><span class="zh" lang="zh-Hans">八字</span>BaziTH</a>
+      <nav aria-label="เมนูหลัก">
+        <ul class="nav">
+          <li><a href="./">ผังดวง</a></li>
+          <li><a href="guide.html" aria-current="page">มือใหม่</a></li>
+          <li><a href="textbook.html">ตำรา</a></li>
+          <li><a href="https://github.com/Solakung/BaziTH">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap guide">
+    <header class="g-hero">
+      <h1>ปาจื้อสำหรับมือใหม่</h1>
+      <p class="g-lead">ไม่ต้องจำศัพท์จีน เข้าใจหกข้อในหน้านี้ก็อ่านผลในเว็บนี้ได้แล้ว อ่านจบในราว 5 นาที</p>
+      <p><a class="btn btn-inline" href="./#birth">ไปดูผังดวงของคุณ</a></p>
+      <nav class="g-toc" aria-label="หัวข้อในหน้านี้">
+        <ol>
+          <li><a href="#g1">แปดอักษรจากเวลาเกิด</a></li>
+          <li><a href="#g2">ตัวไหนคือตัวคุณ</a></li>
+          <li><a href="#g3">ธาตุทั้งห้า</a></li>
+          <li><a href="#g4">ห้าบทบาทรอบตัวคุณ</a></li>
+          <li><a href="#g5">ธาตุที่ช่วยคุณ</a></li>
+          <li><a href="#g6">ดวงเปลี่ยนตามช่วงเวลา</a></li>
+          <li><a href="#g7">ใช้เว็บนี้อย่างไร</a></li>
+          <li><a href="#g8">ถามดวงต่างจากไพ่ยิปซีอย่างไร</a></li>
+          <li><a href="#g9">ข้อควรรู้</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section id="g1" class="g-sec">
+      <h2><span class="g-n">1</span>ปาจื้อคือแปดอักษรจากเวลาเกิด</h2>
+      <p>ปาจื้อ (<span class="zh" lang="zh-Hans">八字</span>) แปลว่า "แปดตัวอักษร" ตำรานำปี เดือน วัน และยามที่คุณเกิด มาแปลงเป็นอักษรจีนส่วนละ 2 ตัว เรียงเป็น 4 คอลัมน์ ตำราเรียกคอลัมน์ว่า "เสา"</p>
+      <ul>
+        <li><strong>ตัวบน</strong> เรียกว่าก้านฟ้า มีทั้งหมด 10 ตัว</li>
+        <li><strong>ตัวล่าง</strong> เรียกว่ากิ่งดิน มี 12 ตัว คือ 12 นักษัตรที่คนไทยคุ้นเคย ตั้งแต่ชวด ฉลู ขาล ไปจนถึงกุน</li>
+      </ul>
+      <figure class="g-chart">
+        <table>
+          <caption class="sr">ตัวอย่างผังปาจื้อ เรียงจากเสายามทางซ้ายไปเสาปีทางขวา</caption>
+          <thead><tr><td></td><th scope="col">ยาม</th><th scope="col" class="me">วัน</th><th scope="col">เดือน</th><th scope="col">ปี</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">ตัวบน<small>ก้านฟ้า</small></th>
+              <td><span class="zh el-4" lang="zh-Hans">癸</span></td>
+              <td class="me"><span class="zh el-0" lang="zh-Hans">乙</span><span class="me-tag">ตัวคุณ</span></td>
+              <td><span class="zh el-2" lang="zh-Hans">己</span></td>
+              <td><span class="zh el-0" lang="zh-Hans">乙</span></td></tr>
+            <tr><th scope="row">ตัวล่าง<small>กิ่งดิน</small></th>
+              <td><span class="zh el-2" lang="zh-Hans">未</span><small>มะแม</small></td>
+              <td class="me"><span class="zh el-1" lang="zh-Hans">巳</span><small>มะเส็ง</small></td>
+              <td><span class="zh el-0" lang="zh-Hans">卯</span><small>เถาะ</small></td>
+              <td><span class="zh el-4" lang="zh-Hans">亥</span><small>กุน</small></td></tr>
+          </tbody>
+        </table>
+        <figcaption>ผังของคนที่เกิด 15 มีนาคม 2538 เวลา 14:30 น. ที่กรุงเทพฯ เรียงแบบตำราจีน ยามอยู่ซ้าย ปีอยู่ขวา สีบอกธาตุ
+          <span class="legend"><span class="lg-item el-0"><i aria-hidden="true"></i>ไม้</span><span class="lg-item el-1"><i aria-hidden="true"></i>ไฟ</span><span class="lg-item el-2"><i aria-hidden="true"></i>ดิน</span><span class="lg-item el-3"><i aria-hidden="true"></i>ทอง</span><span class="lg-item el-4"><i aria-hidden="true"></i>น้ำ</span></span>
+        </figcaption>
+      </figure>
+      <p class="g-note">ปาจื้อใช้ปฏิทินที่ยึดตำแหน่งดวงอาทิตย์ ปีใหม่ของปาจื้อเริ่มราววันที่ 4 กุมภาพันธ์ ไม่ใช่วันตรุษจีนหรือ 1 มกราคม คนที่เกิดเดือนมกราคมหรือต้นกุมภาพันธ์จึงอาจได้ปีนักษัตรต่างจากที่เคยรู้ เดือนของปาจื้อก็เปลี่ยนราววันที่ 4–8 ของทุกเดือน</p>
+    </section>
+
+    <section id="g2" class="g-sec">
+      <h2><span class="g-n">2</span>ตัวบนของเสาวันคือตัวคุณ</h2>
+      <p>อักษรตัวบนของคอลัมน์วันแทนตัวคุณ ตำราเรียกว่า "เจ้าวัน" อักษรอีกเจ็ดตัวแทนคน งาน เงิน และสิ่งแวดล้อมรอบตัว ทั้งหมดอ่านเทียบกับตัวนี้ เจ้าวันมีสิบแบบ แต่ละแบบเปรียบกับสิ่งหนึ่งในธรรมชาติ</p>
+      <ul class="g-stems">
+        <li><span class="zh el-0" lang="zh-Hans">甲</span><p><strong>ต้นไม้ใหญ่</strong>ตรง มีหลักการ ชอบนำ</p></li>
+        <li><span class="zh el-0" lang="zh-Hans">乙</span><p><strong>ไม้เลื้อยและดอกไม้</strong>ยืดหยุ่น ปรับตัวเก่ง</p></li>
+        <li><span class="zh el-1" lang="zh-Hans">丙</span><p><strong>ดวงอาทิตย์</strong>เปิดเผย ใจกว้าง กระตือรือร้น</p></li>
+        <li><span class="zh el-1" lang="zh-Hans">丁</span><p><strong>เทียนและตะเกียง</strong>ละเอียด อบอุ่น ช่างสังเกต</p></li>
+        <li><span class="zh el-2" lang="zh-Hans">戊</span><p><strong>ภูเขา</strong>มั่นคง หนักแน่น</p></li>
+        <li><span class="zh el-2" lang="zh-Hans">己</span><p><strong>ดินสวนและดินนา</strong>ช่างดูแล ใส่ใจรายละเอียด</p></li>
+        <li><span class="zh el-3" lang="zh-Hans">庚</span><p><strong>ขวานและเหล็กกล้า</strong>เด็ดขาด กล้า ตรงไปตรงมา</p></li>
+        <li><span class="zh el-3" lang="zh-Hans">辛</span><p><strong>อัญมณี</strong>ประณีต มีรสนิยม</p></li>
+        <li><span class="zh el-4" lang="zh-Hans">壬</span><p><strong>ทะเลและแม่น้ำ</strong>ฉลาด คล่องตัว รักอิสระ</p></li>
+        <li><span class="zh el-4" lang="zh-Hans">癸</span><p><strong>ฝนและน้ำค้าง</strong>ช่างคิด อ่อนโยน มีจินตนาการ</p></li>
+      </ul>
+      <p class="g-note">คำบรรยายนิสัยเป็นภาพเปรียบตามตำรา ไม่ได้บอกว่าคนที่มีเจ้าวันเดียวกันจะเหมือนกันทุกอย่าง</p>
+    </section>
+
+    <section id="g3" class="g-sec">
+      <h2><span class="g-n">3</span>ธาตุทั้งห้าเกื้อหนุนและข่มกัน</h2>
+      <p>อักษรทุกตัวมีธาตุหนึ่งในห้า คือ ไม้ ไฟ ดิน ทอง และน้ำ ธาตุเกี่ยวข้องกันสองแบบ</p>
+      <div class="g-cycle">
+        <svg viewBox="0 0 340 290" role="img" aria-labelledby="cycle-t">
+          <title id="cycle-t">วงจรธาตุทั้งห้า เส้นทึบรอบนอกคือให้กำเนิด ไม้ ไฟ ดิน ทอง น้ำ แล้ววนกลับไปไม้ เส้นประด้านในคือข่ม ไม้ข่มดิน ดินข่มน้ำ น้ำข่มไฟ ไฟข่มทอง ทองข่มไม้</title>
+          <defs>
+            <marker id="ah-gen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-gen" d="M0 0 L10 5 L0 10 z"/></marker>
+            <marker id="ah-ctl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-ctl" d="M0 0 L10 5 L0 10 z"/></marker>
+          </defs>
+          <line class="gen" x1="94.8" y1="96.6" x2="139.3" y2="64.3" marker-end="url(#ah-gen)"/>
+          <line class="gen" x1="197.5" y1="62.0" x2="242.0" y2="94.3" marker-end="url(#ah-gen)"/>
+          <line class="gen" x1="262.2" y1="149.0" x2="245.2" y2="201.2" marker-end="url(#ah-gen)"/>
+          <line class="gen" x1="199.5" y1="237.4" x2="144.5" y2="237.4" marker-end="url(#ah-gen)"/>
+          <line class="gen" x1="96.0" y1="205.0" x2="79.0" y2="152.8" marker-end="url(#ah-gen)"/>
+          <line class="ctl" x1="101.3" y1="116.6" x2="234.7" y2="116.6" marker-end="url(#ah-ctl)"/>
+          <line class="ctl" x1="180.5" y1="74.3" x2="221.7" y2="201.2" marker-end="url(#ah-ctl)"/>
+          <line class="ctl" x1="245.2" y1="136.6" x2="137.3" y2="215.0" marker-end="url(#ah-ctl)"/>
+          <line class="ctl" x1="206.0" y1="217.4" x2="98.0" y2="139.0" marker-end="url(#ah-ctl)"/>
+          <line class="ctl" x1="117.0" y1="205.0" x2="158.3" y2="78.1" marker-end="url(#ah-ctl)"/>
+          <g class="node el-0"><circle cx="67.3" cy="116.6" r="31"/><text class="nz" x="67.3" y="112.6">木</text><text class="nt" x="67.3" y="132.6">ไม้</text></g>
+          <g class="node el-1"><circle cx="170.0" cy="42.0" r="31"/><text class="nz" x="170.0" y="38.0">火</text><text class="nt" x="170.0" y="58.0">ไฟ</text></g>
+          <g class="node el-2"><circle cx="272.7" cy="116.6" r="31"/><text class="nz" x="272.7" y="112.6">土</text><text class="nt" x="272.7" y="132.6">ดิน</text></g>
+          <g class="node el-3"><circle cx="233.5" cy="237.4" r="31"/><text class="nz" x="233.5" y="233.4">金</text><text class="nt" x="233.5" y="253.4">ทอง</text></g>
+          <g class="node el-4"><circle cx="106.5" cy="237.4" r="31"/><text class="nz" x="106.5" y="233.4">水</text><text class="nt" x="106.5" y="253.4">น้ำ</text></g>
+        </svg>
+        <div>
+          <h3>ให้กำเนิด <small>เส้นทึบ วนตามเข็มนาฬิกา</small></h3>
+          <p>ไม้เป็นเชื้อให้ไฟลุก ไฟเผาจนเป็นเถ้ากลายเป็นดิน ดินสะสมแร่จนเกิดเป็นทอง ทองเย็นจับไอน้ำจนเป็นหยดน้ำ และน้ำหล่อเลี้ยงต้นไม้</p>
+          <h3>ข่ม <small>เส้นประ รูปดาว</small></h3>
+          <p>รากไม้ชอนไชเข้าไปในดิน ดินกั้นน้ำเหมือนคันนา น้ำดับไฟ ไฟหลอมทอง และขวานทองตัดไม้</p>
+          <p class="g-note">"ข่ม" ไม่ได้แปลว่าร้าย การข่มที่พอดีช่วยขัดเกลา เหมือนการตัดแต่งกิ่งทำให้ต้นไม้โตสวย</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="g4" class="g-sec">
+      <h2><span class="g-n">4</span>ธาตุรอบตัวคุณมีห้าบทบาท</h2>
+      <p>เมื่อรู้ธาตุของตัวคุณ ธาตุอื่นทั้งหมดจะได้บทบาทตามความสัมพันธ์กับคุณ บทบาทเหล่านี้คือภาษาที่ปาจื้อใช้อ่านเรื่องงาน เงิน ความรัก และคนรอบตัว</p>
+      <div class="table-scroll">
+        <table class="g-roles">
+          <thead><tr><th scope="col">บทบาท</th><th scope="col">ธาตุแบบไหน</th><th scope="col">ปาจื้อใช้อ่านเรื่อง</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">เพื่อน <span class="zh" lang="zh-Hans">比劫</span></th><td>ธาตุเดียวกับคุณ</td><td>ตัวตน เพื่อน พี่น้อง และการแข่งขัน</td></tr>
+            <tr><th scope="row">ผลงาน <span class="zh" lang="zh-Hans">食伤</span></th><td>ธาตุที่คุณให้กำเนิด</td><td>ฝีมือ ความคิดสร้างสรรค์ การพูดและการแสดงออก</td></tr>
+            <tr><th scope="row">เงิน <span class="zh" lang="zh-Hans">财</span></th><td>ธาตุที่คุณข่ม</td><td>รายได้ ทรัพย์สิน และสิ่งที่คุณจัดการ</td></tr>
+            <tr><th scope="row">หน้าที่ <span class="zh" lang="zh-Hans">官杀</span></th><td>ธาตุที่ข่มคุณ</td><td>งาน ตำแหน่ง กฎระเบียบ และแรงกดดัน</td></tr>
+            <tr><th scope="row">ผู้อุปถัมภ์ <span class="zh" lang="zh-Hans">印</span></th><td>ธาตุที่ให้กำเนิดคุณ</td><td>การเรียน ผู้ใหญ่ที่ช่วยเหลือ และการพักผ่อน</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>ตัวอย่าง</strong> ถ้าคุณเป็น<span class="el-0">ไม้</span> <span class="el-1">ไฟ</span>คือผลงาน <span class="el-2">ดิน</span>คือเงิน <span class="el-3">ทอง</span>คือหน้าที่ และ<span class="el-4">น้ำ</span>คือผู้อุปถัมภ์</p>
+      <p>แต่ละบทบาทแยกเป็นแบบหยินกับหยางอีกอย่างละสอง รวมเป็นสิบ ตำราจึงเรียกว่า "สิบเทพ" ตำราดั้งเดิมดูความรักของผู้ชายจากบทบาทเงิน และของผู้หญิงจากบทบาทหน้าที่ เว็บนี้ใช้ตามตำราและบอกไว้ทุกครั้งที่ใช้</p>
+    </section>
+
+    <section id="g5" class="g-sec">
+      <h2><span class="g-n">5</span>แต่ละคนต้องการธาตุไม่เหมือนกัน</h2>
+      <p>ต้นไม้ที่ขาดน้ำต้องการน้ำ ส่วนต้นไม้ที่ชุ่มน้ำอยู่แล้วต้องการแดด ปาจื้อก็คิดแบบเดียวกัน ตำราดูว่าตัวคุณมีพลังมากหรือน้อยเมื่อเทียบกับธาตุอื่นในผัง</p>
+      <ul>
+        <li><strong>พลังตัวเองน้อย</strong> ต้องการธาตุที่หนุน คือผู้อุปถัมภ์และเพื่อน</li>
+        <li><strong>พลังตัวเองมาก</strong> ต้องการธาตุที่ช่วยใช้พลังนั้น คือผลงาน เงิน หรือหน้าที่</li>
+      </ul>
+      <p>ธาตุที่พาผังเข้าใกล้สมดุลเรียกว่า <strong>ธาตุที่ช่วยคุณ</strong> (ตำราเรียกธาตุให้คุณ) ส่วนธาตุที่เหลือคือ <strong>ธาตุที่ควรใช้แต่พอดี</strong> (ตำราเรียกธาตุให้โทษ) ไม่มีธาตุไหนดีหรือร้ายกับทุกคน ธาตุที่ช่วยคนหนึ่งอาจเป็นธาตุที่อีกคนควรใช้แต่พอดี</p>
+      <p class="g-note">พลังมากหรือน้อยไม่ได้แปลว่าดวงดีหรือดวงร้าย บอกแค่ว่าอะไรช่วยให้คุณสมดุล ตำรายังโยงธาตุกับสี ทิศ และงานบางประเภท เว็บนี้แสดงไว้เป็นแรงบันดาลใจ ไม่ใช่กฎที่ต้องทำตาม</p>
+    </section>
+
+    <section id="g6" class="g-sec">
+      <h2><span class="g-n">6</span>ดวงเปลี่ยนไปตามช่วงเวลา</h2>
+      <p>ผังเกิดเหมือนเมล็ด ส่วนช่วงเวลาเหมือนฤดูกาลที่ผ่านเข้ามา ทุกช่วงมีอักษรคู่ของตัวเอง ตำรานำมาเทียบกับผังของคุณด้วยหลักเดียวกัน ช่วงไหนนำธาตุที่ช่วยคุณมา มักเป็นช่วงที่ราบรื่น</p>
+      <dl class="g-times">
+        <dt>วัยจร 10 ปี</dt><dd>ฉากหลังใหญ่ของชีวิต เปลี่ยนทุกสิบปี วันเริ่มคิดจากวันเกิดและเพศ เว็บนี้จึงต้องรู้เพศเพื่อหาวัยจร</dd>
+        <dt>ปีจร</dt><dd>บรรยากาศของแต่ละปี เปลี่ยนราววันที่ 4 กุมภาพันธ์</dd>
+        <dt>เดือนและวัน</dt><dd>จังหวะสั้น ๆ ภายในปี ใช้ดูเรื่องเฉพาะหน้า</dd>
+        <dt>ปีชง</dt><dd>ปีที่นักษัตรของปีนั้นปะทะหรือขัดกับปีเกิดของคุณ ตำรามองเป็นปีที่ควรรอบคอบ ไม่ใช่ปีอันตราย</dd>
+      </dl>
+    </section>
+
+    <section id="g7" class="g-sec">
+      <h2><span class="g-n">7</span>ใช้เว็บนี้อย่างไร</h2>
+      <ol class="g-steps">
+        <li><strong>กรอกวันเวลาเกิด</strong> ใส่ปี พ.ศ. ได้เลย เลือกจังหวัดที่เกิดเพื่อให้ยามตรงกับตำแหน่งดวงอาทิตย์ และเลือกเพศเพื่อดูวัยจร 10 ปี ไม่ทราบเวลาเกิดก็ดูได้ แต่จะเหลือสามเสา</li>
+        <li><strong>อ่านแท็บ "อ่านง่าย"</strong> สรุปตัวตน พลัง ธาตุที่ช่วยคุณ ช่วง 10 ปี และปีนี้กับปีหน้า เป็นภาษาธรรมดา</li>
+        <li><strong>ถามดวงเรื่องที่อยากรู้</strong> ในแท็บ "ถามดวง" เลือกเรื่องกับช่วงเวลา หรือพิมพ์คำถาม เช่น "ปีหน้าควรเปลี่ยนงานไหม"</li>
+        <li><strong>อยากรู้ลึก</strong> แท็บ "ละเอียด" แสดงศัพท์จริงและตัวเลขทุกขั้น ส่วน<a href="textbook.html">ตำรา</a>อธิบายหลักการทั้งหมด</li>
+      </ol>
+      <p class="g-note">ถ้าเกิดใกล้เวลาเปลี่ยนยามหรือเปลี่ยนเดือน เว็บจะเตือนและบอกว่าผังจะเปลี่ยนเป็นแบบไหนถ้าเวลาเกิดคลาดไปเล็กน้อย ทุกอย่างคำนวณในเบราว์เซอร์ ไม่มีการส่งวันเกิดไปที่ใด</p>
+    </section>
+
+    <section id="g8" class="g-sec">
+      <h2><span class="g-n">8</span>ถามดวงต่างจากไพ่ยิปซีอย่างไร</h2>
+      <ul>
+        <li><strong>ไม่มีการสุ่ม</strong> ไพ่ยิปซีสุ่มไพ่ใหม่ทุกครั้งที่ถาม ถามดวงในเว็บนี้เทียบผังเกิดกับพลังของช่วงเวลา ถามเรื่องเดิมในช่วงเดิมจึงได้คำตอบเดิมเสมอ</li>
+        <li><strong>ไพ่แต่ละใบมีความหมายตายตัว</strong> ใบแรกคือพื้นดวงของคุณในเรื่องนั้น ใบถัดไปคือวัยจร ปี เดือน หรือวัน ตามที่ถาม</li>
+        <li><strong>คำตอบเป็นแนวโน้ม 5 ระดับ</strong> ตั้งแต่ "ทางสะดวก" "แนวโน้มดี" "ทรงตัว" "ต้องออกแรง" ถึง "ช่วงท้าทาย" พร้อมสิ่งที่ทำได้ และกด "ทำไมได้คำตอบนี้" เพื่อดูเหตุผลได้ทุกข้อ</li>
+        <li><strong>สิ่งที่ไม่ทำนาย</strong> ความตาย โรค การตั้งครรภ์ เลขเสี่ยงโชค และใจของคนอื่น ผังเป็นของคุณ จึงบอกได้แค่แนวโน้มฝั่งคุณ</li>
+      </ul>
+    </section>
+
+    <section id="g9" class="g-sec">
+      <h2><span class="g-n">9</span>ข้อควรรู้</h2>
+      <p>ปาจื้อเป็นศาสตร์ความเชื่อ ยังไม่มีหลักฐานทางวิทยาศาสตร์ว่าทำนายนิสัยหรือเหตุการณ์ได้ คำบรรยายกว้าง ๆ มักฟังดูตรงกับเกือบทุกคน นักจิตวิทยาเรียกว่าปรากฏการณ์บาร์นัม จึงควรใช้ผลเป็นเครื่องมือทบทวนตัวเองและหาแรงบันดาลใจ ไม่ใช่คำตัดสินชีวิต</p>
+      <p>ผลในเว็บนี้ไม่ใช่คำแนะนำด้านสุขภาพ การเงิน หรือกฎหมาย ถ้ามีเรื่องที่กังวลจริง ควรคุยกับแพทย์หรือผู้เชี่ยวชาญด้านนั้น หลักจริยธรรมทั้งหมดอยู่ใน<a href="textbook.html#18.-จริยธรรม-ความเป็นส่วนตัว-และข้อจำกัด">บทที่ 18 ของตำรา</a></p>
+      <p><a class="btn btn-inline" href="./#birth">ไปดูผังดวงของคุณ</a></p>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p>หน้านี้สรุปจาก<a href="textbook.html">ตำราปาจื้อฉบับนักพัฒนา</a> บทที่ 1–2, 8, 11–12 และ 15–18</p>
+      <p>ปาจื้อเป็นศาสตร์ความเชื่อ ไม่มีหลักฐานทางวิทยาศาสตร์ว่าทำนายชีวิตได้</p>
+    </div>
+  </footer>
+</body>
+</html>
